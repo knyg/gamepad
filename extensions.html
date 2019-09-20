@@ -138,6 +138,19 @@
     </section>
 
     <section>
+      <h2>
+        Security and privacy considerations
+      </h2>
+      <p>
+        User agents MUST implement the <a>GamepadLightIndicator</a> to only be
+        available in <a data-cite= "secure-contexts#secure-context">secure
+        contexts</a>.  This provides better protection for the user against
+        man-in-the-middle attacks intended to obtain gamepad data. Browsers may
+        ignore this rule for development purposes only.
+      </p>
+    </section>
+
+    <section>
       <h2><dfn>GamepadHand</dfn> Enum</h2>
       <p>
         This enum defines the set of possible hands a gamepad may be held by.
@@ -179,9 +192,10 @@
       </p>
 
       <pre class="idl">
+        [Exposed=Window]
         interface GamepadHapticActuator {
           readonly attribute GamepadHapticActuatorType type;
-          Promise<void> pulse(double value, double duration);
+          Promise&lt;void&gt; pulse(double value, double duration);
         };
       </pre>
 
@@ -236,6 +250,7 @@
       </p>
 
       <pre class="idl">
+        [Exposed=Window]
         interface GamepadPose {
           readonly attribute boolean hasOrientation;
           readonly attribute boolean hasPosition;
@@ -360,7 +375,8 @@
     <section>
       <h2><dfn>GamepadLightColor</dfn></h2>
       <p>
-        This represents the color of a light indicator.
+        This represents the color of a light indicator. The default value should
+        be set to 0 for red, green, and blue.
       </p>
     
       <pre class="idl">
@@ -399,10 +415,11 @@
       </p>
       
       <pre class="idl">
+        [Exposed=Window, SecureContext]
         interface GamepadLightIndicator {
           readonly attribute GamepadLightIndicatorType type;
         
-          Promise<long> setColor(GamepadLightColor color);
+          Promise&lt;long&gt; setColor(GamepadLightColor color);
       };
       </pre>
       
