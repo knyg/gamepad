@@ -138,6 +138,19 @@
     </section>
 
     <section>
+      <h2>
+        Security and privacy considerations 
+      </h2>
+      <p>
+        User agents MUST implement the <a>GamepadTouch</a> to only be
+        available in <a data-cite= "secure-contexts#secure-context">secure
+        contexts</a>. This provides better protection for the user against
+        man-in-the-middle attacks intended to obtain gamepad data. Browsers may
+        ignore this rule for development purposes only.
+      </p>
+    </section>
+
+    <section>
       <h2><dfn>GamepadHand</dfn> Enum</h2>
       <p>
         This enum defines the set of possible hands a gamepad may be held by.
@@ -342,6 +355,7 @@
       </p>
     
       <pre class="idl">
+        [Exposed=Window, SecureContext]
         interface GamepadTouch {
           readonly attribute unsigned long touchId;
           readonly attribute octet surfaceId;
@@ -355,7 +369,8 @@
         <dd>
           Unique id of the touch event. Range is [0, 4294967295]. The user agent
           is responsible for incrementing the touchId for each subsequent touch
-          event based on information provided by the device API.
+          event based on information provided by the device API. touchId SHOULD
+          be set to a default value of 0 when a new Gamepad object is created.
         </dd>
     
         <dt><dfn>surfaceId</dfn></dt>
